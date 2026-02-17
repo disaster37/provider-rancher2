@@ -109,5 +109,5 @@ up login
 
 
 # send package
-up xpkg push disaster37/provider-rancher:v0.1.25 -f ./_output/xpkg/linux_amd64/provider-rancher-v0.1.25.xpkg
+up xpkg push disaster37/provider-rancher2:v0.1.25 -f ./_output/xpkg/linux_amd64/provider-rancher2-v0.1.25.xpkg
 ```
