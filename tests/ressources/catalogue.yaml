@@ -1,0 +1,12 @@
+apiVersion: app.rancher2.contrib.crossplane.io/v1alpha1
+kind: CatalogV2
+metadata:
+  name: openebs
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    clusterId: c-m-xktrp7jq
+    name: openebs
+    url: https://openebs.github.io/openebs
+  providerConfigRef:
+    name: default

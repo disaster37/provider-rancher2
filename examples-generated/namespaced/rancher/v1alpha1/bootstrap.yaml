@@ -1,0 +1,14 @@
+apiVersion: rancher.rancher2.m.contrib.crossplane.io/v1alpha1
+kind: Bootstrap
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rancher/v1alpha1/bootstrap
+  labels:
+    testing.upbound.io/example-name: admin
+  name: admin
+  namespace: crossplane-system
+spec:
+  forProvider:
+    passwordSecretRef:
+      key: example-key
+      name: example-secret

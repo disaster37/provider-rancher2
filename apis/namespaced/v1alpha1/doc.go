@@ -1,5 +1,5 @@
-// Package v1alpha1 contains the core resources of the template jet provider.
+// Package v1alpha1 contains the core resources of the rancher2 jet provider.
 // +kubebuilder:object:generate=true
-// +groupName=template.m.crossplane.io
+// +groupName=rancher2.m.contrib.crossplane.io
 // +versionName=v1alpha1
 package v1alpha1

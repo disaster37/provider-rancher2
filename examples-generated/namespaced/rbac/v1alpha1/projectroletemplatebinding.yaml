@@ -1,0 +1,19 @@
+apiVersion: rbac.rancher2.m.contrib.crossplane.io/v1alpha1
+kind: ProjectRoleTemplateBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rbac/v1alpha1/projectroletemplatebinding
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: foo
+    projectIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    roleTemplateIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    userId: <user_id>

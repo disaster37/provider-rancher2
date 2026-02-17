@@ -10,15 +10,23 @@ package cluster
 import (
 	"k8s.io/apimachinery/pkg/runtime"
 
-	v1alpha1 "github.com/crossplane/upjet-provider-template/apis/cluster/null/v1alpha1"
-	v1alpha1cluster "github.com/crossplane/upjet-provider-template/apis/cluster/v1alpha1"
-	v1beta1 "github.com/crossplane/upjet-provider-template/apis/cluster/v1beta1"
+	v1alpha1 "github.com/disaster37/provider-rancher2/apis/cluster/app/v1alpha1"
+	v1alpha1auth "github.com/disaster37/provider-rancher2/apis/cluster/auth/v1alpha1"
+	v1alpha1k8s "github.com/disaster37/provider-rancher2/apis/cluster/k8s/v1alpha1"
+	v1alpha1rancher "github.com/disaster37/provider-rancher2/apis/cluster/rancher/v1alpha1"
+	v1alpha1rbac "github.com/disaster37/provider-rancher2/apis/cluster/rbac/v1alpha1"
+	v1alpha1cluster "github.com/disaster37/provider-rancher2/apis/cluster/v1alpha1"
+	v1beta1 "github.com/disaster37/provider-rancher2/apis/cluster/v1beta1"
 )
 
 func init() {
 	// Register the types with the Scheme so the components can map objects to GroupVersionKinds and back
 	AddToSchemes = append(AddToSchemes,
 		v1alpha1.SchemeBuilder.AddToScheme,
+		v1alpha1auth.SchemeBuilder.AddToScheme,
+		v1alpha1k8s.SchemeBuilder.AddToScheme,
+		v1alpha1rancher.SchemeBuilder.AddToScheme,
+		v1alpha1rbac.SchemeBuilder.AddToScheme,
 		v1alpha1cluster.SchemeBuilder.AddToScheme,
 		v1beta1.SchemeBuilder.AddToScheme,
 	)

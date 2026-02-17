@@ -1,0 +1,25 @@
+apiVersion: auth.rancher2.m.contrib.crossplane.io/v1alpha1
+kind: AuthConfigOkta
+metadata:
+  annotations:
+    meta.upbound.io/example-id: auth/v1alpha1/authconfigokta
+  labels:
+    testing.upbound.io/example-name: okta
+  name: okta
+  namespace: crossplane-system
+spec:
+  forProvider:
+    displayNameField: <DISPLAY_NAME_FIELD>
+    groupsField: <GROUPS_FIELD>
+    idpMetadataContentSecretRef:
+      key: example-key
+      name: example-secret
+    rancherApiHost: https://<RANCHER_API_HOST>
+    spCertSecretRef:
+      key: example-key
+      name: example-secret
+    spKeySecretRef:
+      key: example-key
+      name: example-secret
+    uidField: <UID_FIELD>
+    userNameField: <USER_NAME_FIELD>

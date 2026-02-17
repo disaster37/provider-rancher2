@@ -1,0 +1,100 @@
+apiVersion: app.rancher2.contrib.crossplane.io/v1alpha1
+kind: AppV2
+metadata:
+  name: openebs
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    chartName: openebs
+    chartVersion: 4.3.3
+    clusterId: c-m-xktrp7jq
+    name: openebs
+    namespace: openebs
+    repoName: openebs
+    values: |
+      openebs-crds:
+        csi:
+          volumeSnapshots:
+            enabled: false
+      engines:
+        local:
+          lvm:
+            enabled: true
+          zfs:
+            enabled: false
+        replicated:
+          mayastor:
+            enabled: false
+      loki:
+        enabled: false
+      alloy:
+        enabled: false
+      localpv-provisioner:
+        localpv:
+          enabled: true
+          basePath: /data/openebs-local-storage
+          resources:
+            limits:
+              cpu: 600m
+              memory: 1Gi
+            requests:
+              cpu: 200m
+              memory: 256Mi
+        hostpathClass:
+          enabled: false
+        analytics:
+          enabled: false
+      lvm-localpv:
+        crds:
+          csi:
+            volumeSnapshots:
+              enabled: false
+          lvmLocalPv:
+            enabled: true
+        lvmNode:
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 200m
+              memory: 256Mi
+          nodeSelector:
+            openebs-lvm: "true"
+          tolerations:
+          - key: local-storage
+            operator: Equal
+            value: "true"
+            effect: NoSchedule
+          - key: local-storage-ssd
+            operator: Equal
+            value: "true"
+            effect: NoSchedule
+          - key: local-storage-sas
+            operator: Equal
+            value: "true"
+            effect: NoSchedule
+          - key: local-storage-sata
+            operator: Equal
+            value: "true"
+            effect: NoSchedule
+          - key: monitor
+            operator: Equal
+            value: "true"
+            effect: NoSchedule
+          - key: project
+            operator: Exists
+            effect: NoSchedule
+        lvmController:
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 200m
+              memory: 256Mi
+        lvmPlugin:
+          allowedTopologies: 'kubernetes.io/hostname,local-storage,local-storage-ssd,local-storage-sas,local-storage-sata,project'
+    wait: true
+  providerConfigRef:
+    name: default

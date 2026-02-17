@@ -1,0 +1,58 @@
+apiVersion: rancher.rancher2.m.contrib.crossplane.io/v1alpha1
+kind: CustomUserToken
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rancher/v1alpha1/customusertoken
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+  namespace: crossplane-system
+spec:
+  forProvider:
+    description: foo token
+    passwordSecretRef:
+      key: attribute.password
+      name: example-user
+    ttl: 0
+    usernameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+
+---
+
+apiVersion: rancher.rancher2.m.contrib.crossplane.io/v1alpha1
+kind: GlobalRoleBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rancher/v1alpha1/customusertoken
+  labels:
+    testing.upbound.io/example-name: foo-login
+  name: foo-login
+  namespace: crossplane-system
+spec:
+  forProvider:
+    globalRoleIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: foo-login-binding
+    userId: ${rancher2_user.foo.id}
+
+---
+
+apiVersion: rancher.rancher2.m.contrib.crossplane.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rancher/v1alpha1/customusertoken
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+  namespace: crossplane-system
+spec:
+  forProvider:
+    enabled: true
+    name: foo
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+    username: foo
