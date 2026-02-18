@@ -10,7 +10,7 @@ func Configure(p *config.Provider) {
 			"name",
 		)
 		r.References["project_id"] = config.Reference{
-			TerraformName: "rancher2_cluster_v2",
+			TerraformName: "rancher2_project",
 		}
 		r.References["role_template_id"] = config.Reference{
 			TerraformName: "rancher2_role_template",
